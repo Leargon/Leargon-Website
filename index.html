@@ -1,191 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leargon — The Architect of Process Clarity & Guardian of Data Ontology</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Léargon - get overview, get insight</title>
+    <link rel="icon" type="image/x-icon" href="LeargonFavicon.png">
+    <script src="index.js"></script>
+    <style>
+        :root { scroll-padding-top: 90px; }
+
+        @media (min-width: 768px) {
+            .horizontal-acc > details { transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1); flex: 1; overflow: hidden; }
+            .horizontal-acc > details[open] { flex: 4; }
+        }
+        
+        @media (max-width: 767px) {
+            .horizontal-acc > details { margin-bottom: 1rem; }
+        }
+
+        details summary::-webkit-details-marker { display:none; }
+        
+        .acc-content { opacity: 0; transition: opacity 0.4s ease; }
+        details[open] .acc-content { opacity: 1; transition-delay: 0.2s; }
+
+        .mui-icon { width: 40px; height: 40px; margin-bottom: 12px; fill: currentColor; }
+    </style>
 </head>
-<body>
+<body class="bg-slate-800 text-gray-100 font-sans pb-20 md:pb-10">
 
-<header>
-    <nav>
-        <div class="logo">Leargon</div>
-        <a href="https://github.com/Leargon/Leargon" target="_blank" rel="noopener noreferrer" class="github-link">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
-            GitHub
-        </a>
+    <nav class="sticky top-0 z-50 bg-slate-800/90 backdrop-blur-md border-b border-slate-700 px-6 py-3">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center shrink-0">
+                <img src="LeargonIcon.png" alt="Logo" class="h-10 w-auto">
+            </div>
+
+            <div class="space-x-8 hidden md:flex items-center">
+                <a href="#" class="text-xs font-bold uppercase tracking-widest text-slate-300 hover:text-white transition">Home</a>
+                
+                <a href="#overview" class="text-xs font-bold uppercase tracking-widest text-slate-300 hover:text-yellow-400 transition underline decoration-yellow-400/30 hover:decoration-yellow-400 underline-offset-[12px]">Overview</a>
+                
+                <a href="#insights" class="text-xs font-bold uppercase tracking-widest text-slate-300 hover:text-amber-400 transition underline decoration-amber-400/30 hover:decoration-amber-400 underline-offset-[12px]">Insights</a>
+                
+                <a href="#start" class="text-xs font-bold uppercase tracking-widest text-slate-300 hover:text-orange-400 transition underline decoration-orange-400/30 hover:decoration-orange-400 underline-offset-[12px]">How to start</a>
+            </div>
+
+            <div class="hidden md:flex items-center">
+                <a href="https://github.com/Leargon/Leargon" target="_blank" 
+                class="inline-flex items-center gap-2.5 bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg border border-slate-700 hover:border-blue-500/50 hover:bg-slate-950 transition-all duration-300 group">
+                    
+                    <svg class="w-5 h-5 fill-current group-hover:text-blue-400 transition-colors" viewBox="0 0 24 24">
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.06.069-.06 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/>
+                    </svg>
+
+                    <span>GitHub</span>
+
+                    <svg class="w-3.5 h-3.5 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                </a>
+            </div>
+        </div>
     </nav>
-</header>
 
-<main>
-    <section class="hero">
-        <h1>Leargon</h1>
-        <p class="tagline">The Architect of Process Clarity & Guardian of Data Ontology</p>
-        <p class="subtitle">In the darkness of fragmented data and hidden workflows, Leargon is the light that reveals the whole.</p>
-        <a href="https://github.com/Leargon/Leargon" target="_blank" rel="noopener noreferrer" class="cta">Get Started on GitHub</a>
-    </section>
-
-    <section class="about" id="about">
-        <h2>What is Leargon?</h2>
-        <p>
-            Leargon is an open-source enterprise platform that brings order to fragmented enterprise landscapes.
-            It connects <strong>Data Ontologies</strong> with <strong>Business Processes</strong>, providing
-            governance and transparency across your entire organization.
-        </p>
-        <p>
-            Built with a Groovy/Micronaut backend, a TypeScript/React frontend, and MySQL for persistence,
-            Leargon is designed for modern deployment via Docker Compose or Kubernetes with Helm charts.
-        </p>
-    </section>
-
-    <section class="triangle" id="triangle">
-        <h2>The Triangle: Domain, Process & Data</h2>
-        <p class="triangle-intro">
-            At the heart of Leargon lies a conceptual triangle — three interconnected pillars that together
-            provide a complete view of your enterprise architecture.
-        </p>
-
-        <div class="triangle-visual">
-            <svg class="triangle-svg" viewBox="0 0 400 370" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="200,30 370,340 30,340" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.3"/>
-                <line x1="200" y1="30" x2="370" y2="340" stroke="var(--accent)" stroke-width="1" opacity="0.15"/>
-                <line x1="370" y1="340" x2="30" y2="340" stroke="var(--accent)" stroke-width="1" opacity="0.15"/>
-                <line x1="30" y1="340" x2="200" y2="30" stroke="var(--accent)" stroke-width="1" opacity="0.15"/>
-                <circle cx="200" cy="30" r="6" fill="var(--accent)"/>
-                <circle cx="370" cy="340" r="6" fill="var(--accent)"/>
-                <circle cx="30" cy="340" r="6" fill="var(--accent)"/>
+    <div class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur border-t border-slate-700 flex md:hidden justify-around items-center p-3 shadow-2xl">
+        <a href="#overview" class="flex flex-col items-center gap-1 text-[10px] uppercase font-bold text-yellow-400">
+            Overview
+        </a>
+        <a href="#insights" class="flex flex-col items-center gap-1 text-[10px] uppercase font-bold text-amber-400">
+            Insights
+        </a>
+        <a href="#start" class="flex flex-col items-center gap-1 text-[10px] uppercase font-bold text-orange-400">
+            How to Start
+        </a>
+        <a href="https://github.com" target="_blank" class="flex flex-col items-center p-2 bg-slate-800 rounded-full border border-slate-700 text-white">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.06.069-.06 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/>
             </svg>
+        </a>
+    </div>
+
+    <header class="py-16 px-6 text-center max-w-5xl mx-auto">
+        <img src="LeargonLogo.png" alt="Léargon Logo" class="mx-auto mb-8 drop-shadow-2xl" style="height: 250px;">
+        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
+            Get overview, <span class="text-yellow-600 font-black">get insights.</span>
+        </h1>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 mb-24">
+        <div id="overview" class="mb-10 border-l-4 border-yellow-400 pl-6 text-shadow">
+            <h2 class="text-3xl md:text-4xl font-black uppercase tracking-widest text-white italic">Get Overview</h2>
         </div>
-
-        <div class="pillars">
-            <div class="pillar">
-                <div class="pillar-icon">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="8" y="6" width="32" height="36" rx="3"/>
-                        <line x1="14" y1="14" x2="34" y2="14"/>
-                        <line x1="14" y1="22" x2="34" y2="22"/>
-                        <line x1="14" y1="30" x2="26" y2="30"/>
-                    </svg>
-                </div>
-                <h3>Domain</h3>
-                <p>
-                    Business Domains serve as the organizational containers — structural groupings of
-                    business capabilities. They provide the context in which processes operate and data
-                    is defined. With full versioning support, every change to a domain is tracked and auditable.
-                </p>
-            </div>
-
-            <div class="pillar">
-                <div class="pillar-icon">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="10" cy="24" r="5"/>
-                        <circle cx="24" cy="10" r="5"/>
-                        <circle cx="38" cy="24" r="5"/>
-                        <circle cx="24" cy="38" r="5"/>
-                        <line x1="14" y1="21" x2="21" y2="13"/>
-                        <line x1="27" y1="13" x2="34" y2="21"/>
-                        <line x1="34" y1="27" x2="27" y2="35"/>
-                        <line x1="21" y1="35" x2="14" y2="27"/>
-                    </svg>
-                </div>
-                <h3>Process</h3>
-                <p>
-                    Processes represent operational workflows — how work flows through the organization.
-                    Leargon maps these processes to detect bottlenecks and structural fractures before
-                    they cause impact, giving you Process Insight across your entire operation.
-                </p>
-            </div>
-
-            <div class="pillar">
-                <div class="pillar-icon">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="24" cy="12" r="6"/>
-                        <circle cx="12" cy="34" r="6"/>
-                        <circle cx="36" cy="34" r="6"/>
-                        <line x1="20" y1="17" x2="15" y2="29"/>
-                        <line x1="28" y1="17" x2="33" y2="29"/>
-                        <line x1="18" y1="34" x2="30" y2="34"/>
-                    </svg>
-                </div>
-                <h3>Data</h3>
-                <p>
-                    The Data Ontology defines business entities, their relationships, and classifications.
-                    Leargon's Ontology Weaver seamlessly integrates data models into live operational
-                    workflows, ensuring your structural definitions stay connected to reality.
-                </p>
-            </div>
-        </div>
-
-        <p class="triangle-summary">
-            Together, these three pillars form an interconnected whole: <strong>Domains</strong> provide context,
-            <strong>Processes</strong> define operational flow, and <strong>Data</strong> defines the entities
-            and their relationships. Leargon weaves them together so organizations can see the full picture
-            rather than working with siloed fragments.
-        </p>
-    </section>
-
-    <section class="features" id="features">
-        <h2>Core Capabilities</h2>
-        <div class="features-grid">
-            <div class="feature">
-                <h3>Holistic Mapping</h3>
-                <p>Multi-dimensional visualization of business objects across various analytical perspectives.</p>
-            </div>
-            <div class="feature">
-                <h3>Ontology Weaver</h3>
-                <p>Seamlessly weaving data models into live operational workflows.</p>
-            </div>
-            <div class="feature">
-                <h3>Process Insight</h3>
-                <p>Detecting bottlenecks and structural fractures before they cause impact.</p>
-            </div>
-            <div class="feature">
-                <h3>Immutable Governance</h3>
-                <p>Defining policies that are enduring yet adaptable to evolving requirements.</p>
-            </div>
+        <div class="horizontal-acc flex flex-col md:flex-row gap-4 md:h-[400px]">
+            <details name="main-acc" class="group bg-purple-500 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M23 7l-7 7-4-4-5.59 5.58L3 12.17V17h18v-2.17l-3-3-4 4-7-7-4 4.58V19h20v-5z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[3.5rem]">Processes</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">TODO: process explanation</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-indigo-500 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M22 11V3h-7v3H9V3H2v8h7V8h2v10h4v3h7v-8h-7v3h-2V8h2v3h7zM7 9H4V5h3v4zm10 10h3v4h-3v-4zm0-14h3v4h-3V5z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[3.5rem]">Data / Information</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">TODO: data explanation</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-sky-500 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.86L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[3.5rem]">Domains</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">TODO: domains explanation</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-emerald-500 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zm-2 12H4v-2h6v2zm0-4H4v-2h6v2zm0-4H4V9h6v2zm0-4H4V5h6v2zm10 12h-8V9h8v10zm-2-8h-4v2h4v-2zm0 4h-4v2h4v-2z"/></svg>
+                    <h3 class="text-2xl font-bold leading-tight min-h-[3.5rem]">Organisational Structure</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">TODO: org explanation</div>
+                </summary>
+            </details>
         </div>
     </section>
 
-    <section class="tech" id="tech">
-        <h2>Technology Stack</h2>
-        <div class="tech-grid">
-            <div class="tech-item">
-                <strong>Backend</strong>
-                <span>Groovy / Micronaut</span>
-            </div>
-            <div class="tech-item">
-                <strong>Frontend</strong>
-                <span>TypeScript / React / Vite</span>
-            </div>
-            <div class="tech-item">
-                <strong>Database</strong>
-                <span>MySQL 8.4</span>
-            </div>
-            <div class="tech-item">
-                <strong>Deployment</strong>
-                <span>Docker Compose / Helm</span>
-            </div>
-            <div class="tech-item">
-                <strong>Auth</strong>
-                <span>JWT + Azure Entra ID</span>
-            </div>
-            <div class="tech-item">
-                <strong>License</strong>
-                <span>Apache 2.0</span>
-            </div>
+    <section class="max-w-7xl mx-auto px-6 mb-24">
+        <div id="insights" class="mb-10 border-l-4 border-amber-600 pl-6">
+            <h2 class="text-3xl md:text-4xl font-black uppercase tracking-widest text-white italic">Get Insights</h2>
+        </div>
+        <div class="horizontal-acc flex flex-col md:flex-row gap-4 md:h-[400px]">
+            <details name="main-acc" class="group bg-purple-600 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M18 13c-1.95 0-3.69 1.15-4.47 2.84l-2.02-3.15C12.48 11.1 13.31 9.65 14 8.28l1.45 2.72L18 10l-4-7.5L10 10l2.55 1 1.45-2.72c-.69 1.37-1.52 2.82-2.49 4.41l-2.02-3.15C10.15 7.85 9 6.5 7.5 6.5 5 6.5 3 8.5 3 11s2 4.5 4.5 4.5c1.11 0 2.11-.4 2.88-1.07l2.02 3.15c-.97 1.59-1.8 3.04-2.49 4.42L8.45 19.28 6 20l4 7.5 4-7.5-2.55-1-1.45 2.72c.69-1.37 1.52-2.82 2.49-4.41l2.02 3.15C15.31 21.85 16.5 23 18 23c2.5 0 4.5-2 4.5-4.5S20.5 14 18 14z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[3.5rem]">Processes out of bounds</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">Agile Delivery...</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-indigo-600 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[3.5rem]">Data Use</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">Data Analytics...</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-sky-600 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M17 15l1.55 1.55L14.12 21H7l3-3H5c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2h14c1.1 0 2 .9 2 2v10h-4zM5 5v11h6.17l3-3H19V5H5z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[3.5rem]">Domain Driven Design</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">DDD Methodology...</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-emerald-600 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M4.25 2h15.5c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25L13 11v6.75c0 .41-.2.79-.55 1.03l-2.5 1.67C9.42 20.81 9 20.43 9 19.75V11L3 4.5c-.48-.52-.45-1.33.07-1.81.2-.18.46-.28.73-.28z"/><path opacity=".3" d="M10 11h4v7.25l-4 2.67V11z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[3.5rem]">Bottleneck teams</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">Capacity management.</div>
+                </summary>
+            </details>
         </div>
     </section>
-</main>
 
-<footer>
-    <p>
-        Leargon is open source under the Apache 2.0 License.
-        <a href="https://github.com/Leargon/Leargon" target="_blank" rel="noopener noreferrer">View on GitHub</a>
-    </p>
-</footer>
+    <section class="max-w-7xl mx-auto px-6 mb-32">
+        <div id="start" class="mb-10 border-l-4 border-orange-800 pl-6">
+            <h2 class="text-3xl md:text-4xl font-black uppercase tracking-widest text-white italic">How to start</h2>
+        </div>
+        <div class="horizontal-acc flex flex-col md:flex-row gap-4 md:h-[400px]">
+            <details name="main-acc" class="group bg-purple-700 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M23 7l-7 7-4-4-5.59 5.58L3 12.17V17h18v-2.17l-3-3-4 4-7-7-4 4.58V19h20v-5z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[4rem] leading-tight">We know our processes / Process-driven</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">Optimieren Sie Ihre Workflows.</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-indigo-700 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M20 13c0 2.21-3.58 4-8 4s-8-1.79-8-4 3.58-4 8-4 8 1.79 8 4zM4 15c0 2.21 3.58 4 8 4s8-1.79 8-4v-2c0 2.21-3.58 4-8 4s-8-1.79-8-4v2zm0-10c0 2.21 3.58 4 8 4s8-1.79 8-4-3.58-4-8-4-8 1.79-8 4zm16 2c0 2.21-3.58 4-8 4s-8-1.79-8-4V5c0 2.21 3.58 4 8 4s8-1.79 8-4v2z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[4rem] leading-tight">We know our data / Data-driven</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">Daten als Fundament.</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-sky-700 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.86L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[4rem] leading-tight">We know our domains / Domain-driven</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">Stärken Sie fachliche Grenzen.</div>
+                </summary>
+            </details>
+            <details name="main-acc" class="group bg-emerald-700 rounded-3xl cursor-pointer shadow-xl border border-white/10">
+                <summary class="list-none h-full p-8 flex flex-col items-start text-white">
+                    <svg class="mui-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <h3 class="text-2xl font-bold min-h-[4rem] leading-tight">I don't know / Need guidance</h3>
+                    <div class="acc-content mt-6 group-open:block hidden border-t border-white/20 pt-4">Wir helfen bei der Analyse.</div>
+                </summary>
+            </details>
+        </div>
+    </section>
 
 </body>
 </html>
